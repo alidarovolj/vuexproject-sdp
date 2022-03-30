@@ -1,18 +1,25 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <navbar />
+    <div @click="$router.push({ name: 'single', params: {id: todo.id} })" v-for="todo of allTodos" :key="todo.id">
+      <p>{{ todo.id }}. {{ todo.name }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mapActions, mapGetters } from 'vuex'
+import navbar from '../components/NavbarComp.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    navbar
+  },
+  computed: mapGetters(['allTodos']),
+  methods: mapActions(['FetchAction']),
+  async mounted() {
+    this.FetchAction();
   }
 }
 </script>
