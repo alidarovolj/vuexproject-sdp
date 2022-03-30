@@ -1,6 +1,6 @@
 <template>
     <div>
-        {{ allTodos[3].name }}
+        <p v-if="changeColor === true">{{ allTodos[3].name }}</p>
     </div>
 </template>
 
@@ -8,6 +8,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  computed: mapGetters(["allTodos"])
+  props: ['actName'],
+  computed: mapGetters(["allTodos", "changeColor"])
 };
 </script>
